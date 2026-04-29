@@ -26,10 +26,7 @@ std::any WordFrequencyAnalyzer::analyze(const std::string& text) {
         for(const auto& word : words)
         {
                 std::string cleanWord = (word | std::ranges::to<std::string>());
-                if(!wordCounts.contains(cleanWord))
-                        wordCounts[cleanWord] = 1;
-                else
-                        wordCounts[cleanWord]++;
+                wordCounts[cleanWord]++;
         }
         
         return wordCounts;
