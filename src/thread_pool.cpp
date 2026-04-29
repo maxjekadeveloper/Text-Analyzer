@@ -3,10 +3,6 @@
 
 namespace FileHandling {
 ThreadPool::ThreadPool(size_t numThreads) : stop(false) {
-        // Implement thread pool constructor
-        // 1. Start worker threads
-        // 2. Set up task queue
-
         while(numThreads > 0)
         {
             workers.emplace_back([this]{ work(); });
@@ -15,10 +11,6 @@ ThreadPool::ThreadPool(size_t numThreads) : stop(false) {
     }
     
 ThreadPool::~ThreadPool() {
-        // Implement thread pool destructor
-        // 1. Set stop flag
-        // 2. Notify all threads
-        // 3. Join all threads
         stop.store(1); // finish thread pool
         condition.notify_all();
 }

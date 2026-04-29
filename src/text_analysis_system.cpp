@@ -34,10 +34,6 @@ namespace FileHandling {
         std::unordered_map<std::string, std::any> results;
         std::vector<std::pair<std::string, std::future<std::any>>> futures;
         
-        // Implement parallel analysis using the thread pool
-        // 1. Submit analysis tasks for each analyzer to the thread pool
-        // 2. Collect results from futures
-        // 3. Store results in the map
         for(auto &analyzer : analyzers)
         {
             auto future = threadPool.enqueue([&analyzer](const std::string& text){return analyzer->analyze(text);}, text);
@@ -53,11 +49,6 @@ namespace FileHandling {
     }
 
     void TextAnalysisSystem::batchProcess(const std::string& directory, const std::string& extension, const std::string& outputDir) {
-        // TODO: Implement batch processing
-        // 1. List files in the directory
-        // 2. Process each file
-        // 3. Save results to output directory
-
         if(!fs::is_directory(directory))
             throw std::runtime_error{directory + "is not directory."};
         if(!fs::exists(directory))
@@ -77,8 +68,6 @@ namespace FileHandling {
 
     std::string TextAnalysisSystem::generateReport(const std::unordered_map<std::string, std::any>& results) const {
         std::string result;
-        // TODO: Implement report generation
-        // Format the results into a readable report
 
         auto word_freq_it = results.find("Word Frequency Analyzer");
         auto word_map = std::any_cast<std::unordered_map<std::string, int>>(word_freq_it->second);

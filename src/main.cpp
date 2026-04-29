@@ -1,11 +1,3 @@
-/**
- * Advanced Text Analysis System
- * C++ Programming Fundamentals Capstone Project
- * 
- * This file provides the starter code structure for implementing
- * a multi-threaded text analysis system using modern C++ features.
- */
-
 #include <iostream>
 #include <string>
 #include <chrono>

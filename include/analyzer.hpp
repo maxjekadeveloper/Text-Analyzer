@@ -26,7 +26,6 @@ public:
     virtual std::string getName() const = 0;
 };
 
-// Word frequency analyzer implementation
 class WordFrequencyAnalyzer : public TextAnalyzer {
 public:
     std::any analyze(const std::string& text) override;

@@ -4,7 +4,6 @@
 
 namespace FileHandling {
 std::unique_ptr<TextAnalyzer> AnalyzerFactory::createAnalyzer(const std::string& type) {
-        // TODO: Implement factory method to create different analyzer types
         if (type == "frequency") {
             return std::make_unique<WordFrequencyAnalyzer>();
         }

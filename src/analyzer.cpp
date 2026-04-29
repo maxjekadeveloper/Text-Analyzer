@@ -21,10 +21,6 @@ namespace FileHandling {
 std::any WordFrequencyAnalyzer::analyze(const std::string& text) {
         std::unordered_map<std::string, int> wordCounts;
         
-        // Implement word frequency analysis
-        // 1. Split the text into words
-        // 2. Clean each word (remove punctuation, convert to lowercase)
-        // 3. Count occurrences of each word
         auto words = cleanWord(text);
 
         for(const auto& word : words)
@@ -49,11 +45,7 @@ std::string WordFrequencyAnalyzer::getName() const {
  */
 std::any ReadabilityAnalyzer::analyze(const std::string& text) {
         ReadabilityMetrics metrics;
-        
-        // Implement readability analysis
-        // 1. Count words, syllables, and sentences
-        // 2. Calculate average sentence and word length
-        // 3. Calculate Flesch Reading Ease and Flesch-Kincaid Grade Level
+
         metrics.totalWords = countWords(text);
         metrics.totalSyllables = countSyllables(text);
         metrics.totalSentences = countSentences(text);
@@ -122,7 +114,6 @@ int ReadabilityAnalyzer::countSyllables(const std::string& word) const{
     
 // Helper function to count sentences in text
 int ReadabilityAnalyzer::countSentences(const std::string& text) const{
-        // Implement sentence counting algorithm
         auto view = text | std::views::filter([](char c){
                 return c == '.' || c == '!' || c == '?';
         });
@@ -173,11 +164,7 @@ std::any SentimentAnalyzer::analyze(const std::string& text) {
         double score = 0.0;
         double positiveCounter = 0;
         double negativeCounter = 0;
-        // Implement sentiment analysis
-        // 1. Split the text into words
-        // 2. Clean each word
-        // 3. Check if the word is in the positive or negative list
-        // 4. Calculate a sentiment score
+
         auto view = cleanWord(text);
         for(const auto& word : view)
         {

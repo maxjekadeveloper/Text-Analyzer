@@ -26,14 +26,8 @@ public:
      * @return A future containing the result of the function
      */
     template<class F, class... Args>
-    auto enqueue(F&& f, Args&&... args) /*-> std::future<typename std::invoke_result_t<F, Args...>>*/ {
+    auto enqueue(F&& f, Args&&... args) {
         using return_type = typename std::invoke_result_t<F, Args...>;
-        
-        // TODO: Implement task enqueuing
-        // 1. Create a packaged task with the function and arguments
-        // 2. Get the future from the task
-        // 3. Add the task to the queue
-        // 4. Notify a worker thread
 
         std::packaged_task<return_type()> task{std::bind(std::forward<F>(f), std::forward<Args>(args)...)};
         std::future<return_type> future = task.get_future();
