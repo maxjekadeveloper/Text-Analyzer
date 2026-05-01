@@ -6,13 +6,14 @@
 #include <memory>
 #include "analyzer.hpp"
 #include "analyzer_factory.hpp"
+#include "file_writer.hpp"
 #include "thread_pool.hpp"
 
 namespace FileHandling {
 // Main class for the text analysis system
 class TextAnalysisSystem {
 public:
-    TextAnalysisSystem(size_t numThreads = std::thread::hardware_concurrency());
+    TextAnalysisSystem(const std::string_view& output, size_t numThreads = std::thread::hardware_concurrency());
 
     /**
      * Analyzes a text file with all available analyzers.
@@ -37,11 +38,13 @@ public:
      * @param extension The extension of files to process (e.g., ".txt")
      * @param outputDir The directory where to save the results
      */
-    void batchProcess(const std::string& directory, const std::string& extension, const std::string& outputDir);
+    void batchProcess(const std::string& directory, const std::string& extension);
     
 private:
     ThreadPool threadPool;
     AnalyzerFactory factory;
+    FileWriter fileWriter;
+    const std::string_view output;
     std::vector<std::unique_ptr<TextAnalyzer>> analyzers;
     
     /**
@@ -51,7 +54,7 @@ private:
      * @return A formatted string report
      */
 
-    void saveResults(const std::string &directory, const std::string &report) const;
+    void saveResults(const std::string &report);
     std::string generateReport(const std::unordered_map<std::string, std::any>& results) const;
 };
 }

@@ -1,5 +1,6 @@
 #include "analyzer.hpp"
 #include <unordered_map>
+#include <iostream>
 
 namespace {
         // Flesch Reading Ease
@@ -171,6 +172,9 @@ std::any SentimentAnalyzer::analyze(const std::string& text) {
                         negativeCounter++;         
         }
         
+        if(!negativeCounter)
+                return 0.0;
+
         score = positiveCounter / negativeCounter;
         return score;
 }

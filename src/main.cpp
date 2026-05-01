@@ -16,11 +16,22 @@ int main(int argc, char* argv[])
         }
         
         std::string directory = argv[1];
-        size_t numThreads = (argc > 2) ? std::stoul(argv[2]) : std::thread::hardware_concurrency();
+        if(directory.back() != '\\')
+            directory = directory + '\\';
+        std::string extension = argv[2];
+        if(extension[0] != '.')
+            extension = '.' + extension;
+
+        std::cout << "directory: " << directory << std::endl;
+        std::cout << "files with an extension: " << extension << std::endl;
+
+        size_t numThreads = (argc > 3) ? std::stoul(argv[3]) : std::thread::hardware_concurrency();
+        std::cout << "threads: " << numThreads << std::endl;
         
         // Create and run the text analysis system
-        FileHandling::TextAnalysisSystem system(numThreads);
-        system.batchProcess(directory, ".txt", directory);
+        const std::string outputDir = directory + "output_file.txt";
+        FileHandling::TextAnalysisSystem system(outputDir, numThreads);
+        system.batchProcess(directory, extension);
     }
     catch(const std::exception &ex)
     {

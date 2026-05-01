@@ -31,12 +31,13 @@ public:
 
         std::packaged_task<return_type()> task{std::bind(std::forward<F>(f), std::forward<Args>(args)...)};
         std::future<return_type> future = task.get_future();
-        auto shared_task = std::make_shared<std::packaged_task<return_type()>>(std::move(task));
-        {
-            std::lock_guard<std::mutex> lock{queueMutex};
-            tasks.emplace([shared_task]{ (*shared_task)(); });
-            condition.notify_one();
-        }
+        task();
+        // auto shared_task = std::make_shared<std::packaged_task<return_type()>>(std::move(task));
+        // {
+        //     std::lock_guard<std::mutex> lock{queueMutex};
+        //     tasks.emplace([shared_task]{ (*shared_task)(); });
+        //     condition.notify_one();
+        // }
         return future;
     }
     

@@ -1,16 +1,17 @@
-#include <fstream>
 #include "file_writer.hpp"
 
 namespace FileHandling {
-void FileWriter::write(const std::string &file, const std::string& content)
+FileWriter::FileWriter(const std::string &file) : offile{file}
 {
-    std::ofstream offile(file);
     if(!offile)
         throw std::runtime_error("Could not open file for writing: " + file);
+}
 
+void FileWriter::write(const std::string& content)
+{
     offile << content;
     if (!offile) {
-        throw std::runtime_error("Error writing to file: " + file);
+        throw std::runtime_error("Error writing to file");
     }
 }
 }
