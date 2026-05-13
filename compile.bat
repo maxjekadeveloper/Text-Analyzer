@@ -4,4 +4,4 @@ cmake --build build
 echo complete!
 
 :: example
-:: ./text_analyzer "C:\Users\Max\Documents\final_project\" "in" 3
+:: ./text_analyzer "C:\Users\Max\Documents\final_project\files\" "in" 3
